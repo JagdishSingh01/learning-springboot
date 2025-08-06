@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import restjagdishapi.journal.app.entity.JournalEntry;
 import restjagdishapi.journal.app.entity.User;
 import restjagdishapi.journal.app.repository.JournalEntryRepository;
@@ -21,6 +22,7 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
+    @Transactional
     public void saveEntry(JournalEntry journalEntry, String userName){
         try {
             User user = userService.findByUserName(userName);
@@ -29,7 +31,7 @@ public class JournalEntryService {
             user.getJournalEntries().add(saved);
             userService.saveEntry(user);
         }catch (Exception e){
-            log.error("Exception", e);
+            System.out.println(e);
         }
     }
 
