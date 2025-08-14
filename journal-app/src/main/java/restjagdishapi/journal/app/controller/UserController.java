@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import restjagdishapi.journal.app.api.response.WeatherResponse;
 import restjagdishapi.journal.app.entity.User;
 import restjagdishapi.journal.app.repository.UserRepository;
 import restjagdishapi.journal.app.service.UserService;
+import restjagdishapi.journal.app.service.WeatherService;
 
 
 @RestController
@@ -21,6 +23,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;;
 
+    @Autowired
+    private WeatherService weatherService;
 
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user){
@@ -38,6 +42,17 @@ public class UserController {
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         userRepository.deleteByUserName(authentication.getName());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> greeting(){
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse weatherResponse = weatherService.getWeather("Mumbai");
+        String greeting = "";
+        if(weatherResponse != null){
+            greeting = ", weather feels like " + weatherResponse.getCurrent().getFeelslike() + " "+ weatherResponse.getCurrent().getWeatherDescriptions() ;
+        }
+        return new ResponseEntity<>("Hi "+ authentication.getName() + greeting, HttpStatus.OK);
     }
 
 

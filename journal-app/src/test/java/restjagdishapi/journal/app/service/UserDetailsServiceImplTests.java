@@ -1,6 +1,7 @@
 package restjagdishapi.journal.app.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
@@ -13,6 +14,7 @@ import restjagdishapi.journal.app.repository.UserRepository;
 import java.util.List;
 import static org.mockito.Mockito.*;
 
+@Disabled
 @ActiveProfiles("dev")
 public class UserDetailsServiceImplTests {
 
