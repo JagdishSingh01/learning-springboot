@@ -18,8 +18,8 @@ import restjagdishapi.journal.app.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-@Profile("dev")
-public class SpringSecurity {
+@Profile("prod")
+public class SpringSecurityProd {
 
     @Autowired
     private UserDetailsServiceImpl userDetailService;
@@ -28,13 +28,11 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/**").permitAll()
-                        .requestMatchers("/journal/**","/user/**").authenticated()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable);
+
 
         http.sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

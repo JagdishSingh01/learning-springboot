@@ -6,16 +6,14 @@ import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import restjagdishapi.journal.app.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import restjagdishapi.journal.app.repository.UserRepository;
 import java.util.List;
 import static org.mockito.Mockito.*;
 
-
+@ActiveProfiles("dev")
 public class UserDetailsServiceImplTests {
 
     @InjectMocks

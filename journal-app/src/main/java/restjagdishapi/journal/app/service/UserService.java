@@ -1,6 +1,9 @@
 package restjagdishapi.journal.app.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class UserService {
     @Autowired
     private UserRepository userRepository;
@@ -26,6 +30,13 @@ public class UserService {
             userRepository.save(user);
             return true;
         } catch (Exception e) {
+//            log.error("error occurred for {}: ", user.getUserName(), e);
+            log.error("hahahaha");
+            log.info("hahaha");
+            log.warn("hahahaha");
+            log.debug("hahahaha");
+            log.trace("hahahaha");
+
             return false;
         }
     }
