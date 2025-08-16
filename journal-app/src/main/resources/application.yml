@@ -2,11 +2,12 @@ spring:
   profiles:
     active: dev
 
-logging:
-  level:
-    restjagdishapi:
-      journal:
-        app: DEBUG
+
+#logging:
+#  level:
+#    restjagdishapi:
+#      journal:
+#        app: DEBUG
 
 #logging:
 #  level:

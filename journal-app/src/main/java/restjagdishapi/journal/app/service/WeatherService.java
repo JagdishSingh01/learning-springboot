@@ -2,26 +2,28 @@ package restjagdishapi.journal.app.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import restjagdishapi.journal.app.api.response.WeatherResponse;
+import restjagdishapi.journal.app.cache.AppCache;
+import restjagdishapi.journal.app.constants.Placeholders;
 
-@Component
+@Service
 public class WeatherService {
-    private static final String apiKey = "6b6c446cd7c686b1dc2fb9904a0b71e2";
-
-    private static final String API = "http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
+    @Value("${weather.api.key}")
+    private String apiKey;
 
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private AppCache appCache;
+
     public WeatherResponse getWeather(String city){
-        String finalAPI = API.replace("CITY", city).replace("API_KEY", apiKey);
+        String finalAPI = appCache.appCache.get(AppCache.keys.WEATHER_API.toString()).replace(Placeholders.CITY, city).replace(Placeholders.API_KEY, apiKey);
 
 /*---------for post calls-------------------------*/
 //        String requestBody = "{\n" +
@@ -37,7 +39,7 @@ public class WeatherService {
 /*------------------------------------------------*/
 
 
-        ResponseEntity<WeatherResponse> respose = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
+        ResponseEntity<WeatherResponse> respose = restTemplate.exchange(finalAPI, HttpMethod.POST, null, WeatherResponse.class);
         WeatherResponse body = respose.getBody();
         return body;
     }
