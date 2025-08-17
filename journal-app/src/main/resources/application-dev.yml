@@ -1,5 +1,9 @@
 
 spring:
+  redis:
+    host: redis-12052.c266.us-east-1-3.ec2.redns.redis-cloud.com
+    port: 12052
+    password: AO7uRA6VzgW5LaBIJfA2A9P8Tj1nsf0x
   data:
     mongodb:
       uri: mongodb+srv://kajukatli995:w0xUkso6at0ZB7UO@cluster0.fxfxuro.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

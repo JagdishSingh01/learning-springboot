@@ -2,6 +2,7 @@ package restjagdishapi.journal.app.cache;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import restjagdishapi.journal.app.entity.ConfigJournalAppEntity;
 import restjagdishapi.journal.app.repository.ConfigJournalAppRepository;
