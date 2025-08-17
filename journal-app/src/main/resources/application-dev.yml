@@ -5,6 +5,17 @@ spring:
       uri: mongodb+srv://kajukatli995:w0xUkso6at0ZB7UO@cluster0.fxfxuro.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       database: journaldb
       auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kajukatli995@gmail.com
+    password: dcow htgc lndf beit
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8080
